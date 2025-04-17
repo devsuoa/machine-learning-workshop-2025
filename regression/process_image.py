@@ -4,6 +4,14 @@ import pandas as pd
 import os
 from common import HISTORY, IMAGE_PATH, CSV_PATH
 
+
+def noise(points, noise_scale=0.01):
+    points = points.astype(np.float32)
+    noise = np.random.uniform(-noise_scale, noise_scale, points.shape)
+    points += noise
+    return points
+
+
 columns = [f'Point(t-{i})' for i in range(HISTORY - 1, -1, -1)]
 columns.append("Point(t+1)")
 df = pd.DataFrame(columns=columns)
@@ -25,6 +33,7 @@ for filename in os.listdir(IMAGE_PATH):
             # Assume the largest contour is the curve
             contour = max(contours, key=cv2.contourArea)
             points = contour.squeeze()
+            # points = noise(points, noise_scale=0.01)
 
             for i in range(HISTORY, len(points) - 1):
                 row_points = points[i-HISTORY:i+1]

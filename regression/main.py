@@ -1,14 +1,16 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from CubicRegression import CubicRegression
-from common import HISTORY, CSV_PATH
+from Regression import Regression
+from common import CSV_PATH
 import pandas as pd
 import ast
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
+DEGREE = 3
+
 
 def plot(points, target):
-    model = CubicRegression(points)
+    model = Regression(points, DEGREE)
     y_predict = model.predict(target[0])
 
     fig, ax = plt.subplots()
@@ -30,7 +32,6 @@ def plot(points, target):
 
     plt.show()
 
-
 df = pd.read_csv(CSV_PATH)
 y_predicts = []
 
@@ -41,7 +42,7 @@ for index, row in df.iterrows():
     points = [ast.literal_eval(p) for p in point_strings]
     target = ast.literal_eval(target_string)
 
-    model = CubicRegression(points)
+    model = Regression(points, DEGREE)
     y_pred = model.predict(target[0])
     # plot(points, target)
     y_predicts.append(y_pred)
