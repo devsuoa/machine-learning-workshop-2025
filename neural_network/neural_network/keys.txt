@@ -1,0 +1,5 @@
+{'DTM': 0, 'WEC': 1, 'F1': 2, 'Sports Car': 3, 'SUV': 4, 'Sedan': 5, 'Hot Hatch': 6, 'Sub-Urban': 7, 'Crossover': 8}
+{'Nürburgring Nordschleife': 0, 'Monza': 1, 'Red Bull Ring': 2, 'Monaco': 3}
+{'C1': 0, 'C2': 1, 'C3': 2, 'C4': 3, 'C5': 4}
+{'Normal': 0, 'Aggressive': 1}
+{'Lock-up': 0, 'Normal': 1, 'Loss of Traction': 2, 'puncture': 3}
