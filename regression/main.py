@@ -32,32 +32,36 @@ def plot(points, target):
 
     plt.show()
 
-df = pd.read_csv(CSV_PATH)
-y_predicts = []
+def runRegression(csv_path):
+    df = pd.read_csv(csv_path)
+    y_predicts = []
 
-for index, row in df.iterrows():
-    point_strings = row.iloc[:-1]
-    target_string = row.iloc[-1]
+    for index, row in df.iterrows():
+        point_strings = row.iloc[:-1]
+        target_string = row.iloc[-1]
 
-    points = [ast.literal_eval(p) for p in point_strings]
-    target = ast.literal_eval(target_string)
+        points = [ast.literal_eval(p) for p in point_strings]
+        target = ast.literal_eval(target_string)
 
-    model = Regression(points, DEGREE)
-    y_pred = model.predict(target[0])
-    # plot(points, target)
-    y_predicts.append(y_pred)
+        model = Regression(points, DEGREE)
+        y_pred = model.predict(target[0])
+        # plot(points, target)
+        y_predicts.append(y_pred)
 
-targets = [ast.literal_eval(t)[1]
-           for t in df.iloc[:, -1]]
-y_true = np.array(targets)
-y_pred = np.array(y_predicts)
+    targets = [ast.literal_eval(t)[1]
+            for t in df.iloc[:, -1]]
+    y_true = np.array(targets)
+    y_pred = np.array(y_predicts)
 
-mae = mean_absolute_error(y_true, y_pred)
-mse = mean_squared_error(y_true, y_pred)
-rmse = np.sqrt(mse)
-r2 = r2_score(y_true, y_pred)
+    mae = mean_absolute_error(y_true, y_pred)
+    mse = mean_squared_error(y_true, y_pred)
+    rmse = np.sqrt(mse)
+    r2 = r2_score(y_true, y_pred)
 
-print(f"Mean Absolute Error (MAE): {mae:.4f}")
-print(f"Mean Squared Error (MSE): {mse:.4f}")
-print(f"Root Mean Squared Error (RMSE): {rmse:.4f}")
-print(f"R-squared (R²): {r2:.4f}")
+    print(f"Mean Absolute Error (MAE): {mae:.4f}")
+    print(f"Mean Squared Error (MSE): {mse:.4f}")
+    print(f"Root Mean Squared Error (RMSE): {rmse:.4f}")
+    print(f"R-squared (R²): {r2:.4f}")
+
+if __name__ == "__main__":
+    runRegression(CSV_PATH)

@@ -5,7 +5,7 @@ from common import HISTORY
 class Regression:
     def __init__(self, points, degree):
         if len(points) != HISTORY:
-            raise ValueError("Exactly 7 points are required.")
+            raise ValueError(f"Exactly {HISTORY} points are required.")
 
         self.x = np.array([p[0] for p in points])
         self.y = np.array([p[1] for p in points])

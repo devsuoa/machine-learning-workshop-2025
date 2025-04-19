@@ -33,6 +33,23 @@ for filename in os.listdir(IMAGE_PATH):
             # Assume the largest contour is the curve
             contour = max(contours, key=cv2.contourArea)
             points = contour.squeeze()
+            """
+            We squeeze the points because contour returns an array like this:
+            array([
+                    [[10, 15]],
+                    [[11, 16]],
+                    [[12, 17]],
+                    ...])
+            shape = (N, 1, 2)
+            It's a 3D array with annoying double brackets, so we squeeze it into:
+            array([
+                [10, 15],
+                [11, 16],
+                [12, 17],
+                ...])
+            shape = (N, 2)
+            Now we get a nice array of coordinates :)
+            """
             # points = noise(points, noise_scale=0.01)
 
             for i in range(HISTORY, len(points) - 1):
