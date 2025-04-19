@@ -53,7 +53,14 @@ $$
 where $y$ is the output vector, $x_i$ are the inputs, and $a_i$ are the weights. The goal of regression is to find the best values for $a_i$. We can also simplify the same equation into vectors:
 
 $$
-\mathbf{y} = a_0 + \begin{pmatrix} a_1 & a_2 & \cdots & a_n \end{pmatrix} \begin{pmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{pmatrix} = \mathbf{a}^T \mathbf{x} + b
+\mathbf{y} = a_0 + 
+\begin{pmatrix} a_1 & a_2 & \cdots & a_n \end{pmatrix}
+\begin{pmatrix}
+\begin{array}{c}
+x_1 \\ x_2 \\ \vdots \\ x_n
+\end{array}
+\end{pmatrix}
+= \mathbf{a}^T \mathbf{x} + b
 $$
 
 where $\mathbf{a}$ is a vector of weights, $\mathbf{x}$ is a vector of inputs and $b$ is the bias term ($a_0$ of the first equation).
