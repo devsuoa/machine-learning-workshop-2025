@@ -53,7 +53,7 @@ $$
 where $y$ is the output vector, $x_i$ are the inputs, and $a_i$ are the weights. The goal of regression is to find the best values for $a_i$. We can also simplify the same equation into vectors:
 
 $$
-\mathbf{y}=a_0+\begin{pmatrix}a_1&a_2&...&a_n\end{pmatrix} \begin{pmatrix}x_1\\x_2\\...\\ x_n \end{pmatrix}=\mathbf{a}^T\mathbf{x}+b
+\mathbf{y}=a_0+\begin{pmatrix}a_1&a_2&...&a_n\end{pmatrix} \begin{pmatrix}x_1\\ x_2\\ ...\\ x_n \end{pmatrix}=\mathbf{a}^T\mathbf{x}+b
 $$
 
 where $\mathbf{a}$ is a vector of weights, $\mathbf{x}$ is a vector of inputs and $b$ is the bias term ($a_0$ of the first equation).
@@ -61,13 +61,13 @@ where $\mathbf{a}$ is a vector of weights, $\mathbf{x}$ is a vector of inputs an
 `numpy` has a handy function `ployfit` that fits a polynomial function to the data with a given degree. It first sets up a matrix of the form:
 
 $$
-\begin{pmatrix}x_1^n&...&x_1^2&x_1^1&1\\ x_2^n&...&x_2^2&x_2^1&1\\...&...&...&...&...\\ x_m^n&...&x_m^2&x_m^1&1\end{pmatrix}
+\begin{pmatrix}x_1^n&...&x_1^2&x_1^1&1\\ x_2^n&...&x_2^2&x_2^1&1\\ ...&...&...&...&...\\ x_m^n&...&x_m^2&x_m^1&1\end{pmatrix}
 $$
 
 where $m$ is the number of data points and $n$ is the degree of the polynomial. For example, if we have `x = np.array([1, 2, 3, 5])` and `degree = 2`, the matrix will look like this:
 
 $$
-\begin{pmatrix}1^2&1^1&1^0\\4^2&2^1&1^0\\9^2&3^1&1^0&\\25^2&5^1&1^0\end{pmatrix}=\begin{pmatrix}1&1&1\\4&2&1\\9&3&1&\\25&5&1\end{pmatrix}
+\begin{pmatrix}1^2&1^1&1^0\\ 4^2&2^1&1^0\\ 9^2&3^1&1^0&\\ 25^2&5^1&1^0\end{pmatrix}=\begin{pmatrix}1&1&1\\ 4&2&1\\ 9&3&1&\\ 25&5&1\end{pmatrix}
 $$
 
 Note that the matrix will always have 1 more column than the degree to account for the bias term.
@@ -81,13 +81,13 @@ Thrid column: $\sqrt{1^2+1^2+1^2+1^2}=2$
 So these are our scales: `[26.89, 6.24, 2]`, we divide each column by their respective scale to get the normalized matrix:
 
 $$
-A=\begin{pmatrix}\frac{1}{26.89}&\frac{1}{6.24}&\frac{1}{2}\\\frac{4}{26.89}&\frac{2}{6.24}&\frac{1}{2}\\\frac{9}{26.89}&\frac{3}{6.24}&\frac{1}{2}&\\\frac{25}{26.89}&\frac{5}{6.24}&\frac{1}{2}\end{pmatrix}\approx\begin{pmatrix}0.0371&0.1602&0.5\\0.1488&0.3205&0.5\\0.3347&0.4808&0.5&\\0.9297&0.9013&0.5\end{pmatrix}
+A=\begin{pmatrix}\frac{1}{26.89}&\frac{1}{6.24}&\frac{1}{2}\\\frac{4}{26.89}&\frac{2}{6.24}&\frac{1}{2}\\\frac{9}{26.89}&\frac{3}{6.24}&\frac{1}{2}&\\\frac{25}{26.89}&\frac{5}{6.24}&\frac{1}{2}\end{pmatrix}\approx\begin{pmatrix}0.0371&0.1602&0.5\\ 0.1488&0.3205&0.5\\ 0.3347&0.4808&0.5&\\ 0.9297&0.9013&0.5\end{pmatrix}
 $$
 
 Now we solve for:
 
 $$
-A\times \begin{pmatrix}c_0\\c_1\\c_2\end{pmatrix}=\mathbf{y}
+A\times \begin{pmatrix}c_0\\ c_1\\ c_2\end{pmatrix}=\mathbf{y}
 $$
 
 where $c_0, c_1, c_2$ are the coefficients of the polynomial. This step will be handled by `lstsq` from the numpy library.
