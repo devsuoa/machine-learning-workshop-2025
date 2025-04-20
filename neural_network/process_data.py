@@ -5,7 +5,7 @@ from common import TARGET
 def process_data():
     df = pd.read_csv(
         'neural_network/simulated_dataset.csv').drop(columns=['entry log', 'Team', 'Driver'])
-
+    print(df.columns)
     # First, encode all non-number fields
     motorsport_types = df['Motorsport_Type'].unique()
     motorsport_type_dict = {motorsport: i for i,
@@ -56,3 +56,5 @@ def process_data():
         file.write(str(event_dict))
     
     return df_reduced
+
+# process_data()

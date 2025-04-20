@@ -4,7 +4,7 @@ from Regression import Regression
 from common import CSV_PATH
 import pandas as pd
 import ast
-from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+from sklearn.metrics import mean_squared_error, r2_score
 
 DEGREE = 3
 
@@ -53,14 +53,10 @@ def runRegression(csv_path):
     y_true = np.array(targets)
     y_pred = np.array(y_predicts)
 
-    mae = mean_absolute_error(y_true, y_pred)
     mse = mean_squared_error(y_true, y_pred)
-    rmse = np.sqrt(mse)
     r2 = r2_score(y_true, y_pred)
 
-    print(f"Mean Absolute Error (MAE): {mae:.4f}")
     print(f"Mean Squared Error (MSE): {mse:.4f}")
-    print(f"Root Mean Squared Error (RMSE): {rmse:.4f}")
     print(f"R-squared (R²): {r2:.4f}")
 
 if __name__ == "__main__":
