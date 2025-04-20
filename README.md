@@ -311,6 +311,30 @@ After we know the loss, we can use `torch.optim.Adam` to update the weights. Ada
 
 ![Gradient Descent](/assets//Screenshot%202025-04-20%20130827.png)
 
+In the code, this is done by calling:
+```python
+optimiser.step()
+```
+What happens behind the scenes is that when we calculate the loss (or cost) $C$ at the output node, this loss is propagated back to the input node using the chain rule.
+
+![Chain rule](/assets/Screenshot%202025-04-20%20213637.png)
+
+In this diagram, $w$ is our weight, $z$ is the value of the node, $y$ is the value after the activation function, and $C$ is the cost. We aim to minimise the cost, meaning that the partial derivative of $C$ w.r.t. $w$ should be minimal. We know that $C$ is a function of $y$, $y$ is a function of $z$, and $z$ is a function of $w$. Thus, we can apply the chain rule to find $\frac{\partial C}{\partial w}$:
+
+$$
+\frac{\partial C}{\partial w} = \frac{\partial C}{\partial y}\times \frac{\partial y}{\partial w} = \frac{\partial C}{\partial y}\times \frac{\partial y}{\partial z}\times \frac{\partial z}{\partial w}
+$$
+
+If the gradient of $\frac{\partial C}{\partial w}$ is positive, we need to decrease the weight. If the gradient is negative, we need to increase the weight. The magnitude of the gradient decides how much the weight is changed. The new weight will be calculated as:
+
+$$
+w'=w-\eta\frac{\partial C}{\partial w}
+$$
+
+where $\eta$ is the learning rate. The learning rate can be changed. A large learning rate will train the model faster but may overshoot the minimum. A small learning rate will more likely to reach global minimum at the cost of time and the risk of stuck in a local mimimum.
+
+Now the model is ready for the next training iteration.
+
 ## Step 2: Prepare the Training and Testing Data
 
 To ensure the reliability of our evaluation, we will split the dataset into `training` and `testing` sets. The model will learn the `training` set and we will evaluate the performance of the model against the `testing` set. We use the `train_test_split` method from `sklearn` and set a ratio of 80:20:
@@ -371,9 +395,10 @@ Similarly, we can also use MSE and R-squared score to evaluate the model.
 ```python
 model.eval()
 with torch.no_grad():
+    # Run the model on the testing dataset
     test_preds = model(X_test_tensor)
-    test_preds = test_preds.squeeze().numpy()
-    y_test_np = y_test_tensor.squeeze().numpy()
+    test_preds = test_preds.numpy()
+    y_test_np = y_test_tensor.numpy()
 
 mse = mean_squared_error(y_test_np, test_preds)
 r2 = r2_score(y_test_np, test_preds)

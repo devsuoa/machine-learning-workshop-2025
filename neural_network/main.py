@@ -45,8 +45,8 @@ def runNeuralNetwork(csv_path):
     model.eval()
     with torch.no_grad():
         test_preds = model(X_test_tensor)
-        test_preds = test_preds.squeeze().numpy()
-        y_test_np = y_test_tensor.squeeze().numpy()
+        test_preds = test_preds.numpy()
+        y_test_np = y_test_tensor.numpy()
 
     mse = mean_squared_error(y_test_np, test_preds)
     r2 = r2_score(y_test_np, test_preds)

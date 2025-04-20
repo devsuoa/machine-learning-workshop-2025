@@ -57,4 +57,4 @@ def process_data():
     
     return df_reduced
 
-# process_data()
+process_data()
