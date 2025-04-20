@@ -40,7 +40,7 @@ We will use F1 track layouts as our dataset, and we can use computer vision tech
 
 ## Step 0.5: Image Processing
 
-We will use OpenCV to process the images. We first convert everything to grayscale, then find the contours, and finally writing to a CSV file. This is implemented in `regression/process_image.py`. We will not go into much detail, you can check out my image processing workshop [here](https://github.com/devsuoa/computer-vision-workshop-2025/blob/main/README.md).
+We will use OpenCV to process the images. We first convert everything to grayscale, then find the contours, and finally writing to a CSV file. This is implemented in `regression/process_image.py`. We will not go into much detail, you can check out my image processing workshop [here](https://github.com/devsuoa/computer-vision-workshop-2025).
 
 ## Step 1: Fit a Line to the Points
 
