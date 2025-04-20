@@ -2,7 +2,7 @@
 
 # DEVS x FSAE Machine Learning Workshop 2025
 
-[Slides]()
+[Recording]()
 
 # Introduction
 
