@@ -32,7 +32,7 @@ We will start off with a simple regression program. An FSAE car is able races ar
 
 ## Step 0: Dataset
 
-We will use F1 track layouts as our dataset, and we can use computer vision techniques to convert the images into a set of coordinates. The dataset can be found [here](https://www.shutterstock.com/image-vector/complete-set-circuits-f1-2017-season-730184434).
+We will use F1 track layouts as our dataset, and we can use computer vision techniques to convert the images into a set of coordinates. The dataset can be found [here](https://www.shutterstock.com/image-vector/complete-set-circuits-f1-2017-season-730184434). The computer vision workshop recordings can be found [here](https://github.com/devsuoa/computer-vision-workshop-2025).
 
 #### Some example images:
 
@@ -40,7 +40,7 @@ We will use F1 track layouts as our dataset, and we can use computer vision tech
 
 ## Step 0.5: Image Processing
 
-We will use OpenCV to process the images. We first convert everything to grayscale, then find the contours, and finally writing to a CSV file. This is implemented in `regression/process_image.py`. We will not go into much detail, you can check out my image processing workshop [here](https://github.com/devsuoa/computer-vision-workshop-2025).
+We will use OpenCV to process the images. We first convert everything to grayscale, then find the contours, and finally writing to a CSV file. This is implemented in `regression/process_image.py`. We will not go into much detail.
 
 ## Step 1: Fit a Line to the Points
 
@@ -67,7 +67,7 @@ $$
 where $m$ is the number of data points and $n$ is the degree of the polynomial. For example, if we have `x = np.array([1, 2, 3, 5])` and `degree = 2`, the matrix will look like this:
 
 $$
-\begin{pmatrix}1^2&1^1&1^0 \\\ 4^2&2^1&1^0 \\\ 9^2&3^1&1^0& \\\ 25^2&5^1&1^0\end{pmatrix}=\begin{pmatrix}1&1&1 \\\ 4&2&1 \\\ 9&3&1& \\\ 25&5&1\end{pmatrix}
+\begin{pmatrix}1^2&1^1&1^0 \\\ 2^2&2^1&2^0 \\\ 3^2&3^1&3^0& \\\ 5^2&5^1&5^0\end{pmatrix}=\begin{pmatrix}1&1&1 \\\ 4&2&1 \\\ 9&3&1& \\\ 25&5&1\end{pmatrix}
 $$
 
 Note that the matrix will always have 1 more column than the degree to account for the bias term.
@@ -286,6 +286,8 @@ We then pass this sum through an activation function. Activation functions are u
 ![LeakyReLU](/assets/images.jpeg)
 
 This means that if the sum is negative, the function will output a small negative number to avoid the output of a neuron being 0, meaning that it will never be activated and thus never learn anything. A positive number will be passed through unchanged.
+
+![Activation](/assets//neuron-activation-monkey.png)
 
 A `forward` method is defined within class, which will be called automatically when we use the model. It describes how the input flows through the model.
 
